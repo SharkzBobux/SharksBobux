@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: url('shawal.png') repeat;
+            background-size: 400px;
+            background-color: #f5eedf;
+            padding: 30px 5% 0 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .order-wrapper {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* CARD SECTION */
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(44, 66, 87, 0.08);
+            border: 1px solid #ebdccb;
+        }
+
+        /* HEADER LANGKAH (STEP HEADER) */
+        .step-header {
+            background-color: #d8a26c; /* Cokelat krem karamel */
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background-color: #ffffff;
+            color: #d8a26c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* BODY FORM */
+        .form-body {
+            padding: 30px 35px;
+            background-color: #fcfaf7;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #3b281a;
+            margin-bottom: 10px;
+        }
+
+        .form-label i {
+            color: #633f2e;
+            font-size: 16px;
+        }
+
+        /* INPUT FIELD */
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 18px;
+            color: #9c8273;
+            font-size: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            padding-left: 45px;
+            background-color: #f7f3ed;
+            border: 1px solid #ebdccb;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b281a;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #d8a26c;
+            background-color: #ffffff;
+        }
+
+        .form-input-no-icon {
+            padding-left: 20px;
+        }
+
+        /* DUAL GRID INPUT */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* WHATSAPP INPUT BOX */
+        .whatsapp-box {
+            display: flex;
+            background-color: #f7f3ed;
+            border: 1px solid #ebdccb;
+            border-radius: 25px;
+            overflow: hidden;
+            align-items: center;
+        }
+
+        .whatsapp-prefix {
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #633f2e;
+            border-right: 1px solid #ebdccb;
+            background-color: #efe8df;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .whatsapp-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b281a;
+            outline: none;
+        }
+
+        /* PILIHAN CEPAT (QUICK SELECT) */
+        .quick-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #3b281a;
+            margin-top: 10px;
+            margin-bottom: 16px;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .package-card {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 18px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .package-card:hover, .package-card.selected {
+            border-color: #633f2e;
+            box-shadow: 0 4px 12px rgba(99, 63, 46, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .package-amount {
+            font-size: 15px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .package-divider {
+            border-bottom: 1px dashed #ebdccb;
+            margin: 2px 0;
+        }
+
+        .package-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        /* RINGKASAN PESANAN (SUMMARY) */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #634d3c;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ebdccb;
+        }
+
+        .summary-row span:last-child {
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .summary-box {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .summary-calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #634d3c;
+            margin-bottom: 10px;
+        }
+
+        .summary-calc-row span:last-child {
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .total-box {
+            background-color: #f5eedf;
+            border: 1px solid #ebdccb;
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .total-box span {
+            font-size: 16px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .total-box .total-price {
+            font-size: 20px;
+            color: #633f2e;
+        }
+
+        /* TOMBOL COMPLETE ORDER */
+        .btn-complete {
+            width: 100%;
+            background-color: #633f2e;
+            color: #ffffff;
+            border: none;
+            padding: 16px 0;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 6px 20px rgba(99, 63, 46, 0.2);
+        }
+
+        .btn-complete:hover {
+            background-color: #4d3124;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           NEW CUSTOM FOOTER (STYLE COKELAT)
+           ========================================== */
+        .custom-footer {
+            background-color: #5c3c2a;
+            color: #fbf8f3;
+            padding: 60px 5% 30px 5%;
+            margin-left: -5%;
+            margin-right: -5%;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(235, 220, 203, 0.2);
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ebdccb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(251, 248, 243, 0.1);
+            border: 1px solid rgba(235, 220, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbf8f3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background-color: #fbf8f3;
+            color: #5c3c2a;
+        }
+
+        .footer-bottom-note {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            font-size: 11px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .package-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dual-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="order-wrapper">
+        
+        <!-- BAGIAN 1: MASUKKAN DATA -->
+        <div class="form-container">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">MASUKKAN DATA</div>
+            </div>
+
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="form-label">Username Roblox</label>
+                    <div class="input-box">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="inputUsername" class="form-input" placeholder="Username123" value="Username123" oninput="updateSummary()">
+                    </div>
+                </div>
+
+                <div class="dual-grid form-group">
+                    <div>
+                        <label class="form-label"><i class="fa-solid fa-box-open"></i> Jumlah</label>
+                        <div class="input-box">
+                            <input type="number" id="inputJumlah" class="form-input form-input-no-icon" value="10" oninput="hitungHarga()">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label"><i class="fa-solid fa-box-open"></i> Nominal Harga</label>
+                        <div class="input-box">
+                            <input type="text" id="inputHarga" class="form-input form-input-no-icon" value="Rp 1.350" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-title">Atau pilih cepat :</div>
+
+                <div class="package-grid">
+                    <div class="package-card" onclick="pilihPaket(100, 13500, this)">
+                        <div class="package-amount">100 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 13.500</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(200, 27000, this)">
+                        <div class="package-amount">200 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 27.000</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(300, 40500, this)">
+                        <div class="package-amount">300 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 40.500</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(400, 54000, this)">
+                        <div class="package-amount">400 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 54.000</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(500, 67500, this)">
+                        <div class="package-amount">500 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 67.500</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(600, 81000, this)">
+                        <div class="package-amount">600 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 81.000</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(700, 94500, this)">
+                        <div class="package-amount">700 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 94.500</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(800, 108000, this)">
+                        <div class="package-amount">800 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 108.000</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(900, 121500, this)">
+                        <div class="package-amount">900 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 121.500</div>
+                    </div>
+                    <div class="package-card" onclick="pilihPaket(1000, 135000, this)">
+                        <div class="package-amount">1000 Bobux</div>
+                        <div class="package-divider"></div>
+                        <div class="package-price">Rp 135.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 2: DETAIL KONTAK -->
+        <div class="form-container">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">DETAIL KONTAK</div>
+            </div>
+
+            <div class="form-body">
+                <div class="dual-grid">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-box">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" class="form-input" placeholder="Contoh: user@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nomor WhatsApp / Telepon</label>
+                        <div class="whatsapp-box">
+                            <div class="whatsapp-prefix">+62</div>
+                            <input type="tel" class="whatsapp-input" placeholder="Contoh: 081234567890">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 3: RINGKASAN PESANAN -->
+        <div class="form-container">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">RINGKASAN PESANAN</div>
+            </div>
+
+            <div class="form-body">
+                <div class="summary-row">
+                    <span>Produk</span>
+                    <span id="sumProduk">Bobux Gamepass</span>
+                </div>
+                <div class="summary-row">
+                    <span>Jumlah</span>
+                    <span id="sumJumlah">10 RBX</span>
+                </div>
+                <div class="summary-row">
+                    <span>Username</span>
+                    <span id="sumUsername">Username123</span>
+                </div>
+                <div class="summary-row">
+                    <span>Metode</span>
+                    <span id="sumMetode">Gamepass</span>
+                </div>
+                <div class="summary-row">
+                    <span>Biaya Admin</span>
+                    <span>+Rp 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Voucher</span>
+                    <span>-</span>
+                </div>
+                <div class="summary-row" style="border-bottom: none;">
+                    <span>Diskon</span>
+                    <span>-</span>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-calc-row">
+                        <span>Subtotal</span>
+                        <span id="sumSubtotal">Rp 1.350</span>
+                    </div>
+                    <div class="summary-calc-row" style="margin-bottom: 0;">
+                        <span>Biaya layanan</span>
+                        <span>Rp 0</span>
+                    </div>
+
+                    <div class="total-box">
+                        <span>Total Bayar</span>
+                        <span class="total-price" id="sumTotal">Rp 1.350</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOMBOL COMPLETE ORDER -->
+        <button class="btn-complete">
+            Complete Order <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </div>
+
+    <!-- CUSTOM FOOTER (STYLE COKELAT) -->
+    <footer class="custom-footer">
+        <div class="footer-content-grid">
+            <!-- Kolom 1: Profil Brand & Kontak -->
+            <div class="footer-col">
+                <h3>Sharks Bobux Store</h3>
+                <p>Alamat: Bandung, Jawa Barat</p>
+                <p>No. Whatsapp: +62 811-2221-7700</p>
+                
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore?xtok=MTJwdnBvb3ZwZnF2NQ%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux?si=PT7zJYfko8tLFKCi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Kolom 2: Layanan -->
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="order.html">Beli Bobux</a></li>
+                    <li><a href="product.html">Beli Gamepass</a></li>
+                    <li><a href="order.html">Bobux via Login</a></li>
+                    <li><a href="order.html">Cek Pesanan</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolom 3: Informasi -->
+            <div class="footer-col">
+                <h3>Informasi</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-note">
+            <p>Sharks Bobux adalah platform independen untuk item digital game. Kami tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Roblox Corporation. Semua trademark adalah milik pemliknya masing-masing dan digunakan hanya untuk tujuan identifikasi. Tidak ada konten yang kami buat yang mengklaim kepemilikan atas trademark pihak ketiga.</p>
+            <p>© 2026 Sharks Bobux Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT KALKULATOR & SINKRONISASI DATATABLE -->
+    <script>
+        const HARGA_PER_BOBUX = 135;
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+            
+            if (type === 'login') {
+                document.getElementById('sumProduk').innerText = 'Bobux Via Login';
+                document.getElementById('sumMetode').innerText = 'Via Login';
+            } else if (type === 'username') {
+                document.getElementById('sumProduk').innerText = 'Bobux Via Username';
+                document.getElementById('sumMetode').innerText = 'Via Username';
+            } else {
+                document.getElementById('sumProduk').innerText = 'Bobux Gamepass';
+                document.getElementById('sumMetode').innerText = 'Gamepass';
+            }
+            updateSummary();
+        }
+
+        function hitungHarga() {
+            let jumlahInput = document.getElementById('inputJumlah').value;
+            let totalHarga = jumlahInput * HARGA_PER_BOBUX;
+            let formattedHarga = 'Rp ' + totalHarga.toLocaleString('id-ID');
+            
+            document.getElementById('inputHarga').value = formattedHarga;
+            document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+            updateSummary();
+        }
+
+        function pilihPaket(jumlah, harga, element) {
+            document.getElementById('inputJumlah').value = jumlah;
+            document.getElementById('inputHarga').value = 'Rp ' + harga.toLocaleString('id-ID');
+
+            document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            updateSummary();
+        }
+
+        function updateSummary() {
+            let username = document.getElementById('inputUsername').value;
+            let jumlah = document.getElementById('inputJumlah').value;
+            let hargaVal = document.getElementById('inputHarga').value;
+
+            document.getElementById('sumUsername').innerText = username ? username : '-';
+            document.getElementById('sumJumlah').innerText = jumlah ? jumlah + ' RBX' : '0 RBX';
+            document.getElementById('sumSubtotal').innerText = hargaVal;
+            document.getElementById('sumTotal').innerText = hargaVal;
+        }
+    </script>
+</body>
+</html>

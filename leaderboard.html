@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: url('starx.png') repeat;
+            background-size: 400px;
+            background-color: #f5eedf;
+            padding: 30px 5% 0 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .leaderboard-container {
+            background-color: #fbf8f3;
+            border-radius: 28px;
+            padding: 40px;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto 50px auto;
+            box-shadow: 0 15px 35px rgba(44, 66, 87, 0.1);
+            border: 1px solid #ebdccb;
+        }
+
+        /* HEADER SECTION */
+        .hall-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #5c3c2a;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .title-group h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 6px;
+        }
+
+        .title-group p {
+            font-size: 14px;
+            color: #7a6352;
+            font-weight: 600;
+        }
+
+        /* FILTER TOMBOL (ALL TIME SAJA) */
+        .filter-btn {
+            background-color: #5c3c2a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(92, 60, 42, 0.15);
+        }
+
+        /* PODIUM TOP 3 (GRID) */
+        .podium-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr 1fr;
+            gap: 20px;
+            align-items: flex-end;
+            margin-bottom: 35px;
+        }
+
+        .podium-card {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 24px;
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(59, 40, 26, 0.04);
+        }
+
+        /* KARTU JUARA 1 (SPECIAL STYLE) */
+        .podium-card.rank-1 {
+            background: linear-gradient(135deg, #fffcf5 0%, #fdf3d8 100%);
+            border: 2px solid #e6cb8a;
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+            background-color: #f7f3ed;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #ebdccb;
+            z-index: 2;
+        }
+
+        .rank-1 .rank-badge {
+            background-color: #faeab9;
+            border-color: #e6cb8a;
+        }
+
+        .crown-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: #d4af37;
+            z-index: 2;
+        }
+
+        .avatar-box {
+            width: 75px;
+            height: 75px;
+            background-color: #f5eedf;
+            border-radius: 50%;
+            margin: 15px auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ebdccb;
+            overflow: hidden;
+        }
+
+        .rank-1 .avatar-box {
+            width: 90px;
+            height: 90px;
+            border-color: #d4af37;
+            background-color: #faeab9;
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 16px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 18px;
+            word-break: break-all;
+        }
+
+        .podium-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .stat-box-small {
+            background-color: #fcfaf7;
+            border: 1px solid #ebdccb;
+            border-radius: 14px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .rank-1 .stat-box-small {
+            background-color: #ffffff;
+            border-color: #f2e3be;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #8c7362;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .stat-val {
+            font-size: 13px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .spent-box {
+            background-color: #fcfaf7;
+            border: 1px solid #ebdccb;
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .rank-1 .spent-box {
+            background-color: #ffffff;
+            border-color: #f2e3be;
+        }
+
+        .spent-val {
+            font-size: 14px;
+            font-weight: 800;
+            color: #5c3c2a;
+        }
+
+        /* LIST RANKING 4 - 10 */
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 18px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .list-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 40, 26, 0.04);
+        }
+
+        .list-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .list-rank {
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+            background-color: #f7f3ed;
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid #ebdccb;
+            min-width: 42px;
+            text-align: center;
+        }
+
+        .list-avatar {
+            width: 45px;
+            height: 45px;
+            background-color: #f5eedf;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #5c3c2a;
+            border: 1px solid #ebdccb;
+            overflow: hidden;
+        }
+
+        .list-info h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 2px;
+        }
+
+        .list-info p {
+            font-size: 12px;
+            color: #8c7362;
+            font-weight: 600;
+        }
+
+        .list-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            text-align: right;
+        }
+
+        .list-stat-group .lbl {
+            font-size: 10px;
+            color: #8c7362;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .list-stat-group .val {
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .list-stat-group .val-spent {
+            color: #5c3c2a;
+        }
+
+        /* CUSTOM FOOTER (STYLE COKELAT) */
+        .custom-footer {
+            background-color: #5c3c2a;
+            color: #fbf8f3;
+            padding: 60px 5% 30px 5%;
+            margin-left: -5%;
+            margin-right: -5%;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(235, 220, 203, 0.2);
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ebdccb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(251, 248, 243, 0.1);
+            border: 1px solid rgba(235, 220, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbf8f3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background-color: #fbf8f3;
+            color: #5c3c2a;
+        }
+
+        .footer-bottom-note {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            font-size: 11px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* RESPONSIF */
+        @media (max-width: 850px) {
+            .podium-grid {
+                grid-template-columns: 1fr;
+            }
+            .podium-card.rank-1 {
+                transform: translateY(0);
+            }
+            .list-right {
+                gap: 15px;
+            }
+            .footer-content-grid { 
+                grid-template-columns: 1fr; 
+                gap: 30px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="leaderboard-container">
+        
+        <!-- HALL OF FAME BADGE -->
+        <div class="hall-badge">
+            <i class="fa-solid fa-trophy"></i> Hall of Fame
+        </div>
+
+        <!-- HEADER & FILTER -->
+        <div class="header-row">
+            <div class="title-group">
+                <h1>Top 10 All Time</h1>
+                <p>Daftar pembeli Bobux terbaik sepanjang waktu.</p>
+            </div>
+            <div>
+                <button class="filter-btn">All Time</button>
+            </div>
+        </div>
+
+        <!-- PODIUM TOP 3 -->
+        <div class="podium-grid">
+            
+            <!-- JUARA 2: Sharkzone -->
+            <div class="podium-card">
+                <span class="rank-badge">#2</span>
+                <i class="fa-solid fa-crown crown-icon" style="color: #94a3b8;"></i>
+                <div class="avatar-box">
+                    <img src="sharkzone.png" alt="Sharkzone" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';">
+                </div>
+                <div class="username">Sharkzone</div>
+                <div class="podium-stats">
+                    <div class="stat-box-small">
+                        <div class="stat-label">Order</div>
+                        <div class="stat-val">34</div>
+                    </div>
+                    <div class="stat-box-small">
+                        <div class="stat-label">Bobux</div>
+                        <div class="stat-val">207.640 RBX</div>
+                    </div>
+                </div>
+                <div class="spent-box">
+                    <div class="stat-label">Spent</div>
+                    <div class="spent-val">Rp 21.836.050</div>
+                </div>
+            </div>
+
+            <!-- JUARA 1: CxnammonSkyz -->
+            <div class="podium-card rank-1">
+                <span class="rank-badge">#1</span>
+                <i class="fa-solid fa-crown crown-icon"></i>
+                <div class="avatar-box">
+                    <img src="cxnammon.png" alt="CxnammonSkyz" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';">
+                </div>
+                <div class="username">CxnammonSkyz</div>
+                <div class="podium-stats">
+                    <div class="stat-box-small">
+                        <div class="stat-label">Order</div>
+                        <div class="stat-val">44</div>
+                    </div>
+                    <div class="stat-box-small">
+                        <div class="stat-label">Bobux</div>
+                        <div class="stat-val">379.112 RBX</div>
+                    </div>
+                </div>
+                <div class="spent-box">
+                    <div class="stat-label">Spent</div>
+                    <div class="spent-val">Rp 33.045.462</div>
+                </div>
+            </div>
+
+            <!-- JUARA 3: ChOiHyUnNiEgF -->
+            <div class="podium-card">
+                <span class="rank-badge">#3</span>
+                <i class="fa-solid fa-crown crown-icon" style="color: #b45309;"></i>
+                <div class="avatar-box">
+                    <img src="choihyunniegf.png" alt="ChOiHyUnNiEgF" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';">
+                </div>
+                <div class="username">ChOiHyUnNiEgF</div>
+                <div class="podium-stats">
+                    <div class="stat-box-small">
+                        <div class="stat-label">Order</div>
+                        <div class="stat-val">18</div>
+                    </div>
+                    <div class="stat-box-small">
+                        <div class="stat-label">Bobux</div>
+                        <div class="stat-val">130.000 RBX</div>
+                    </div>
+                </div>
+                <div class="spent-box">
+                    <div class="stat-label">Spent</div>
+                    <div class="spent-val">Rp 13.851.250</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LIST RANKING 4 - 10 -->
+        <div class="leaderboard-list">
+            
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#4</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>tr*****19</h4>
+                        <p>114 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">102.079 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 12.366.123</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#5</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>fe****ia</h4>
+                        <p>6 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">85.000 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 10.452.000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#6</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>fu****ou</h4>
+                        <p>23 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">101.249 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 10.167.750</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#7</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>ay**********55</h4>
+                        <p>2 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">100.000 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 10.128.500</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#8</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>ra****0o</h4>
+                        <p>3 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">80.000 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 9.913.500</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#9</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>ad***********ik</h4>
+                        <p>1 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">10.000 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 9.228.000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item">
+                <div class="list-left">
+                    <div class="list-rank">#10</div>
+                    <div class="list-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="list-info">
+                        <h4>am***ee</h4>
+                        <p>2 pembelian</p>
+                    </div>
+                </div>
+                <div class="list-right">
+                    <div class="list-stat-group">
+                        <div class="lbl">Bobux</div>
+                        <div class="val">78.572 RBX</div>
+                    </div>
+                    <div class="list-stat-group">
+                        <div class="lbl">Spent</div>
+                        <div class="val val-spent">Rp 8.285.780</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CUSTOM FOOTER (STYLE COKELAT) -->
+    <footer class="custom-footer">
+        <div class="footer-content-grid">
+            <!-- Kolom 1: Profil Brand & Kontak -->
+            <div class="footer-col">
+                <h3>Sharks Bobux Store</h3>
+                <p>Alamat: Bandung, Jawa Barat</p>
+                <p>No. Whatsapp: +62 811-2221-7700</p>
+                
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore?xtok=MTJwdnBvb3ZwZnF2NQ%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux?si=PT7zJYfko8tLFKCi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Kolom 2: Layanan -->
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="order.html">Beli Bobux</a></li>
+                    <li><a href="product.html">Beli Gamepass</a></li>
+                    <li><a href="order.html">Bobux via Login</a></li>
+                    <li><a href="order.html">Cek Pesanan</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolom 3: Informasi -->
+            <div class="footer-col">
+                <h3>Informasi</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-note">
+            <p>Sharks Bobux adalah platform independen untuk item digital game. Kami tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Roblox Corporation. Semua trademark adalah milik pemliknya masing-masing dan digunakan hanya untuk tujuan identifikasi. Tidak ada konten yang kami buat yang mengklaim kepemilikan atas trademark pihak ketiga.</p>
+            <p>© 2026 Sharks Bobux Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

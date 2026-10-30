@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background: url('login.png') repeat;
+            background-size: 400px;
+            background-color: #f5eedf; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 5%; 
+            color: #3b281a; 
+        }
+
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+            align-items: stretch;
+        }
+
+        /* KARTU KIRI (INFO & SWITCH TAB) */
+        .auth-left-card {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 32px;
+            padding: 45px 40px;
+            box-shadow: 0 12px 30px rgba(44, 66, 87, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-logo-circle {
+            width: 50px; height: 50px; background-color: #f3ece1;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 20px; color: #5c3c2a;
+            border: 1px solid #ebdccb; margin-bottom: 25px;
+        }
+
+        .auth-left-card h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .auth-left-card p {
+            font-size: 14px;
+            color: #7a6352;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #3b281a;
+        }
+
+        .feature-item i {
+            color: #5c3c2a;
+            font-size: 16px;
+        }
+
+        .auth-switch-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: #f3ece1;
+            padding: 6px;
+            border-radius: 28px;
+            border: 1px solid #ebdccb;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 0;
+            border-radius: 22px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: #5c3c2a;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(92, 60, 42, 0.2);
+        }
+
+        .tab-btn.inactive {
+            color: #7a6352;
+        }
+        .tab-btn.inactive:hover {
+            color: #3b281a;
+        }
+
+        /* KARTU KANAN (FORM LOGIN) */
+        .auth-right-card {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 32px;
+            padding: 45px 45px;
+            box-shadow: 0 12px 30px rgba(44, 66, 87, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 6px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: #7a6352;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 8px;
+        }
+
+        .input-field-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: #9a7f6c;
+            font-size: 15px;
+        }
+
+        .input-field-wrapper input {
+            width: 100%;
+            background-color: #ffffff;
+            border: 1.5px solid #ebdccb;
+            border-radius: 16px;
+            padding: 14px 16px 14px 46px;
+            font-size: 14px;
+            color: #3b281a;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .input-field-wrapper input:focus {
+            border-color: #5c3c2a;
+            box-shadow: 0 0 0 3px rgba(92, 60, 42, 0.1);
+        }
+
+        .input-field-wrapper input::placeholder {
+            color: #b09986;
+            font-weight: 500;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            cursor: pointer;
+            color: #9a7f6c;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #5c3c2a;
+            color: #ffffff;
+            border: none;
+            border-radius: 18px;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(92, 60, 42, 0.2);
+            transition: all 0.2s;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .btn-submit:hover {
+            background-color: #432b1d;
+            transform: translateY(-1px);
+        }
+
+        .auth-footer-text {
+            text-align: center;
+            font-size: 13px;
+            color: #7a6352;
+            font-weight: 600;
+        }
+
+        .auth-footer-text a {
+            color: #5c3c2a;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .auth-footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .auth-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- KARTU KIRI -->
+        <div class="auth-left-card">
+            <div>
+                <div class="brand-logo-circle"><i class="fa-solid fa-cube"></i></div>
+                <h2>Buat akun baru <br>Robuxindo</h2>
+                <p>Platform terpercaya untuk top up Roblox, gamepass, dan kebutuhan item lainnya dengan flow belanja yang rapi, cepat, dan aman.</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item"><i class="fa-regular fa-circle-check"></i> Transaksi cepat dan aman</li>
+                    <li class="feature-item"><i class="fa-regular fa-circle-check"></i> Harga terjangkau untuk kebutuhan Roblox</li>
+                    <li class="feature-item"><i class="fa-regular fa-circle-check"></i> Customer support siap bantu setiap hari</li>
+                </ul>
+            </div>
+
+            <div class="auth-switch-tabs">
+                <button class="tab-btn active">Masuk</button>
+                <a href="register.html" class="tab-btn inactive">Daftar</a>
+            </div>
+        </div>
+
+        <!-- KARTU KANAN (FORM LOGIN) -->
+        <div class="auth-right-card">
+            <h1 class="form-title">Masuk</h1>
+            <p class="form-subtitle">Masuk dengan username atau email akun Robuxindo Anda.</p>
+
+            <form onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label>Username atau Email</label>
+                    <div class="input-field-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="text" placeholder="Masukkan username atau email" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-field-wrapper">
+                        <i class="fa-solid fa-lock" style="left: 17px; font-size: 14px;"></i>
+                        <input type="password" id="passwordInput" placeholder="Masukkan password" required style="padding-left: 46px; padding-right: 46px;">
+                        <i class="fa-regular fa-eye toggle-password" id="togglePass" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+
+            <div class="auth-footer-text">
+                Belum punya akun? <a href="register.html">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById('passwordInput');
+            const icon = document.getElementById('togglePass');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

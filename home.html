@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background: url('shawal.png') repeat;
+            background-size: 400px;
+            background-color: #f5eedf; 
+            padding: 25px 5% 0 5%; 
+            color: #3b281a; 
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* BANNER CAROUSEL */
+        .carousel-wrapper {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(44, 66, 87, 0.15);
+            margin-bottom: 30px;
+            border: 3px solid #fbf8f3;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            background-color: #fbf8f3;
+        }
+
+        .slide-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-custom {
+            background: linear-gradient(135deg, #689abe 0%, #4b7da3 100%);
+            padding: 0 50px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .slide-content h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .slide-content p {
+            color: #fbf8f3;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .shark-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251, 248, 243, 0.25);
+            border: 1px solid #fbf8f3;
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .roblox-card {
+            width: 260px;
+            height: 200px;
+            background: rgba(251, 248, 243, 0.9);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            border: 2px solid #fbf8f3;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .roblox-card i {
+            font-size: 50px;
+            color: #4b7da3;
+            margin-bottom: 10px;
+        }
+
+        /* TOMBOL PANAH & DOTS BANNER ATAS */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(251, 248, 243, 0.7);
+            border: 1px solid #fbf8f3;
+            border-radius: 50%;
+            color: #3b281a;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            z-index: 10;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .nav-arrow:hover { background: #fbf8f3; color: #5c3c2a; }
+        .nav-arrow.prev { left: 15px; }
+        .nav-arrow.next { right: 15px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: rgba(251, 248, 243, 0.5); cursor: pointer; transition: all 0.2s;
+        }
+        .dot.active { width: 25px; border-radius: 10px; background: #fbf8f3; }
+
+        /* STATS PANEL KREM */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            background: #fbf8f3;
+            border: 1px solid #ebdccb;
+            border-radius: 28px;
+            padding: 24px 28px;
+            box-shadow: 0 10px 25px rgba(44, 66, 87, 0.08);
+            margin-bottom: 35px;
+        }
+
+        .stat-item {
+            display: flex; align-items: center; gap: 14px;
+            padding: 5px 10px; border-right: 1px dashed #ebdccb;
+        }
+        .stat-item:last-child { border-right: none; }
+
+        .stat-icon {
+            width: 54px; height: 54px; background: #f3ece1; 
+            border-radius: 18px; display: flex; align-items: center;
+            justify-content: center; font-size: 24px; border: 1px solid #ebdccb; flex-shrink: 0;
+        }
+
+        .stat-info .label { font-size: 13px; color: #7a6352; font-weight: 700; }
+        .stat-info .value { font-size: 17px; color: #3b281a; font-weight: 800; margin-top: 2px; }
+
+        /* SECTION: INGIN BELI APA HARI INI? */
+        .products-section { margin-bottom: 35px; }
+
+        .section-header { text-align: center; margin-bottom: 25px; }
+        .section-header h2 { font-size: 32px; font-weight: 800; color: #3b281a; margin-bottom: 6px; }
+        .section-header p { font-size: 15px; color: #5c4535; font-weight: 700; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .card-featured {
+            background: linear-gradient(135deg, #fbf8f3 0%, #f3ece1 100%);
+            border: 1px solid #ebdccb;
+            border-radius: 28px;
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(44, 66, 87, 0.06);
+            min-height: 280px;
+        }
+
+        .card-content { display: flex; flex-direction: column; justify-content: space-between; z-index: 2; max-width: 60%; }
+
+        .badge-terlaris {
+            display: inline-flex; align-items: center; gap: 6px;
+            background-color: #ffffff; border: 1px solid #ebdccb;
+            padding: 5px 14px; border-radius: 20px; font-size: 11px;
+            font-weight: 800; color: #3b281a; margin-bottom: 12px;
+        }
+
+        .card-featured h3 { font-size: 28px; font-weight: 800; color: #3b281a; margin-bottom: 15px; }
+
+        .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+        .benefit-list li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #3b281a; }
+        .benefit-list li i { color: #5c3c2a; }
+
+        .btn-buy-featured {
+            background-color: #5c3c2a; color: #ffffff; text-decoration: none;
+            padding: 13px 26px; border-radius: 25px; font-size: 14px; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(92, 60, 42, 0.2); transition: all 0.2s;
+        }
+        .btn-buy-featured:hover { background-color: #432b1d; transform: translateY(-2px); }
+
+        .card-character {
+            position: absolute; right: 15px; bottom: 0; height: 90%;
+            display: flex; align-items: flex-end; z-index: 1;
+        }
+        .card-character img { height: 100%; object-fit: contain; }
+
+        .side-products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr auto;
+            gap: 15px;
+        }
+
+        .card-item {
+            background-color: #fbf8f3; border: 1px solid #ebdccb;
+            border-radius: 24px; padding: 24px 18px;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; justify-content: space-between;
+        }
+
+        .card-icon-box {
+            width: 58px; height: 58px; background-color: #f3ece1;
+            border-radius: 18px; display: flex; align-items: center;
+            justify-content: center; font-size: 24px; color: #3b281a;
+            border: 1px solid #ebdccb; margin-bottom: 12px;
+        }
+
+        .card-item h4 { font-size: 17px; font-weight: 800; color: #3b281a; margin-bottom: 4px; }
+        .card-item p { font-size: 12px; color: #7a6352; font-weight: 700; margin-bottom: 16px; }
+
+        .btn-buy-outline {
+            width: 100%; background-color: #ffffff; border: 1px solid #ebdccb;
+            color: #3b281a; text-decoration: none; padding: 10px 0;
+            border-radius: 20px; font-size: 13px; font-weight: 800; transition: all 0.2s; text-align: center;
+        }
+        .btn-buy-outline:hover { background-color: #f3ece1; }
+
+        .card-coming-soon {
+            grid-column: span 2; background-color: #f3ece1; border: 1px solid #ebdccb;
+            border-radius: 20px; padding: 16px 24px; display: flex; flex-direction: column; gap: 4px;
+        }
+        .coming-soon-badge { font-size: 10px; font-weight: 800; color: #8c5332; letter-spacing: 1px; }
+        .card-coming-soon h5 { font-size: 14px; font-weight: 800; color: #3b281a; }
+
+        /* ==========================================
+            SECTION: BARU SAJA DIBELI (LIVE TRANSAKSI)
+            ========================================== */
+        .live-section-container {
+            background-color: #fbf8f3;
+            border: 1px solid #ebdccb;
+            border-radius: 28px;
+            padding: 32px 40px;
+            box-shadow: 0 10px 25px rgba(44, 66, 87, 0.08);
+            margin-top: 35px;
+            margin-bottom: 35px;
+        }
+
+        .live-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .live-title-box h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 4px;
+        }
+
+        .live-title-box p {
+            font-size: 14px;
+            color: #7a6352;
+            font-weight: 700;
+        }
+
+        .badge-live {
+            background-color: #dcfce7;
+            color: #16a34a;
+            border: 1px solid #86efac;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot-green {
+            width: 8px; height: 8px; background-color: #16a34a;
+            border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+
+        .live-carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .live-track-wrapper {
+            overflow: hidden;
+            width: 100%;
+            padding: 5px 0;
+        }
+
+        .live-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .live-card {
+            min-width: 320px;
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 24px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 6px 18px rgba(44, 66, 87, 0.05);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .live-card-left { display: flex; align-items: center; gap: 12px; }
+
+        .user-avatar-circle {
+            width: 44px; height: 44px; background-color: #f3ece1;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 18px; color: #5c3c2a;
+            border: 1px solid #ebdccb; overflow: hidden;
+        }
+
+        .live-user-info h4 { font-size: 14px; font-weight: 800; color: #3b281a; }
+        .live-user-info .product-name { font-size: 11px; font-weight: 800; color: #7a6352; text-transform: uppercase; margin-top: 2px; }
+        .live-user-info .bobux-amount { font-size: 13px; font-weight: 700; color: #5c4535; margin-top: 1px; }
+
+        .live-card-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .live-time { font-size: 11px; color: #7a6352; font-weight: 600; }
+        .live-price { font-size: 14px; font-weight: 800; color: #3b281a; }
+
+        .check-icon {
+            width: 20px; height: 20px; border-radius: 50%;
+            border: 1.5px solid #16a34a; color: #16a34a;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; margin-top: 2px;
+        }
+
+        .nav-btn-live {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: #ffffff; border: 1px solid #ebdccb;
+            color: #3b281a; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            position: absolute; z-index: 10;
+            box-shadow: 0 4px 12px rgba(44, 66, 87, 0.08);
+            transition: all 0.2s;
+        }
+        .nav-btn-live:hover { background: #f3ece1; }
+        .nav-btn-live.prev { left: -19px; }
+        .nav-btn-live.next { right: -19px; }
+
+        /* ==========================================
+            SECTION: DUA KOLOM FAQ (BAWAH)
+            ========================================== */
+        .faq-two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+            align-items: start;
+            margin-top: 35px;
+            margin-bottom: 50px;
+        }
+
+        /* Kolom Kiri: Punya Pertanyaan & Masih Bingung */
+        .faq-left-box {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 32px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(44, 66, 87, 0.08);
+        }
+
+        .faq-badge-top {
+            display: inline-flex; align-items: center; gap: 8px;
+            background-color: #f3ece1; border: 1px solid #ebdccb;
+            color: #5c3c2a; padding: 6px 16px; border-radius: 20px;
+            font-size: 12px; font-weight: 800; margin-bottom: 16px;
+        }
+
+        .faq-main-title {
+            font-size: 30px; font-weight: 800; color: #3b281a; margin-bottom: 10px; line-height: 1.2;
+        }
+
+        .faq-desc {
+            font-size: 14px; color: #7a6352; font-weight: 600; margin-bottom: 25px; line-height: 1.5;
+        }
+
+        .faq-inner-card {
+            background: #ffffff;
+            border: 1.5px solid #ebdccb;
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(44, 66, 87, 0.05);
+        }
+
+        .faq-inner-content { max-width: 55%; z-index: 2; }
+        .faq-inner-title { font-size: 20px; font-weight: 800; color: #3b281a; margin-bottom: 6px; }
+        .faq-inner-text { font-size: 12px; color: #7a6352; font-weight: 600; margin-bottom: 16px; line-height: 1.4; }
+
+        .btn-faq-contact {
+            background-color: #5c3c2a; color: #ffffff; text-decoration: none;
+            padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(92, 60, 42, 0.2); transition: all 0.2s;
+        }
+        .btn-faq-contact:hover { background-color: #432b1d; transform: translateY(-2px); }
+
+        .faq-inner-character {
+            position: absolute; right: 10px; bottom: 0; height: 115%;
+            display: flex; align-items: flex-end; z-index: 1;
+        }
+        .faq-inner-character img { height: 100%; object-fit: contain; }
+
+        /* Kolom Kanan: Pusat Bantuan & Accordion */
+        .faq-right-box {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 32px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(44, 66, 87, 0.08);
+        }
+
+        .faq-accordion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            background: #ffffff;
+            border: 1.5px solid #ebdccb;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .accordion-header i {
+            color: #7a6352;
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px;
+            font-size: 13px;
+            color: #7a6352;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .accordion-item.active .accordion-body {
+            max-height: 150px;
+            padding-bottom: 18px;
+        }
+
+        /* ==========================================
+            NEW CUSTOM FOOTER (STYLE COKELAT)
+            ========================================== */
+        .custom-footer {
+            background-color: #5c3c2a;
+            color: #fbf8f3;
+            padding: 60px 5% 30px 5%;
+            margin-left: -5%;
+            margin-right: -5%;
+            margin-top: auto;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(235, 220, 203, 0.2);
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ebdccb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(251, 248, 243, 0.1);
+            border: 1px solid rgba(235, 220, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbf8f3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background-color: #fbf8f3;
+            color: #5c3c2a;
+        }
+
+        .footer-bottom-note {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            font-size: 11px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .faq-two-column-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid { grid-template-columns: 1fr; }
+            .card-content { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <!-- BANNER CAROUSEL -->
+        <div class="carousel-wrapper">
+            <button class="nav-arrow prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="nav-arrow next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            
+            <div class="carousel-track" id="track">
+                
+                <div class="slide">
+                    <img src="img/banner.png" alt="Banner" class="slide-banner-img" onerror="this.src='https://via.placeholder.com/1200x340?text=Sharks+Robux+Store';">
+                </div>
+
+                <div class="slide">
+                    <div class="slide-custom">
+                        <div class="slide-content">
+                            <div class="shark-badge">
+                                <i class="fa-solid fa-fish-fins"></i> SHARKS ROBUX STORE
+                            </div>
+                            <h1>Top Up Robux Murah <br>& Proses Kilat</h1>
+                            <p>Stok Selalu Ready • Aman & Terpercaya</p>
+                        </div>
+                        <div class="roblox-card">
+                            <i class="fa-solid fa-cube"></i>
+                            <span style="font-weight: 800; color: #3b281a;">ROBLOX ROBUX</span>
+                            <span style="font-size: 12px; color: #4b7da3; margin-top: 4px; font-weight: 700;">Instan Delivery 24/7</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="carousel-dots">
+                <div class="dot active" onclick="setSlide(0)"></div>
+                <div class="dot" onclick="setSlide(1)"></div>
+            </div>
+        </div>
+
+        <!-- PANEL STATISTIK -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">📦</div>
+                <div class="stat-info">
+                    <div class="label">Bobux Tersedia</div>
+                    <div class="value">R$ 1.874.743</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🏷️</div>
+                <div class="stat-info">
+                    <div class="label">Harga Bobux</div>
+                    <div class="value">Rp 13.500/100</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <div class="label">Total Bobux Terjual</div>
+                    <div class="value">R$ 96.043.954</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🛍️</div>
+                <div class="stat-info">
+                    <div class="label">Total Order</div>
+                    <div class="value">166.185</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: INGIN BELI APA HARI INI? -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2>Ingin beli apa hari ini?</h2>
+                <p>Temukan produk kesukaan mu dengan harga murah dan proses tercepat</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card card-featured">
+                    <div class="card-content">
+                        <div>
+                            <span class="badge-terlaris">
+                                <i class="fa-solid fa-sparkles"></i> TERLARIS
+                            </span>
+                            <h3>Top Up Bobux</h3>
+
+                            <ul class="benefit-list">
+                                <li><i class="fa-regular fa-circle-check"></i> Jaminan 100% Masuk</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Harga Paling Murah</li>
+                                <li><i class="fa-regular fa-circle-check"></i> Proses Paling Cepat</li>
+                            </ul>
+                        </div>
+
+                        <a href="Product.html" target="_self" class="btn-buy-featured">
+                            Beli Sekarang <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gambar img/yay.png ditambahkan di bagian kanan Top Up Bobux -->
+                    <div class="card-character">
+                        <img src="img/yay.png" alt="Yay Character" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <div class="side-products-grid">
+                    <div class="product-card card-item">
+                        <div class="card-icon-box">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <div>
+                            <h4>Gift Gamepass</h4>
+                            <p>Temukan item gamepass Favoritmu</p>
+                        </div>
+                        <a href="product.html" target="_self" class="btn-buy-outline">Beli Sekarang</a>
+                    </div>
+
+                    <div class="product-card card-item">
+                        <div class="card-icon-box">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div>
+                            <h4>Limited Items</h4>
+                            <p>Koleksi Item Eksklusif Impianmu</p>
+                        </div>
+                        <a href="product.html" target="_self" class="btn-buy-outline">Beli Sekarang</a>
+                    </div>
+
+                    <div class="product-card card-coming-soon">
+                        <span class="coming-soon-badge">COMING SOON</span>
+                        <h5>Ditunggu update selanjutnya ya</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: BARU SAJA DIBELI (LIVE TRANSAKSI) -->
+        <section class="live-section-container">
+            <div class="live-header">
+                <div class="live-title-box">
+                    <h3>Baru Saja Dibeli</h3>
+                    <p>Bergabung dengan ribuan bloxian yang sudah top up di sini.</p>
+                </div>
+                <div class="badge-live">
+                    <span class="dot-green"></span> Live
+                </div>
+            </div>
+
+            <div class="live-carousel-container">
+                <button class="nav-btn-live prev" onclick="moveLiveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+
+                <div class="live-track-wrapper">
+                    <div class="live-track" id="liveTrack">
+                        
+                        <!-- CARD 1 -->
+                        <div class="live-card">
+                            <div class="live-card-left">
+                                <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+                                <div class="live-user-info">
+                                    <h4>wa******84</h4>
+                                    <div class="product-name">BOBUX GAMEPASS</div>
+                                    <div class="bobux-amount">90 Bobux</div>
+                                </div>
+                            </div>
+                            <div class="live-card-right">
+                                <div class="live-time">8 jam yang lalu</div>
+                                <div class="live-price">Rp 12.150</div>
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 2 -->
+                        <div class="live-card">
+                            <div class="live-card-left">
+                                <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+                                <div class="live-user-info">
+                                    <h4>az**********za</h4>
+                                    <div class="product-name">BOBUX GAMEPASS</div>
+                                    <div class="bobux-amount">600 Bobux</div>
+                                </div>
+                            </div>
+                            <div class="live-card-right">
+                                <div class="live-time">10 jam yang lalu</div>
+                                <div class="live-price">Rp 81.000</div>
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 3 -->
+                        <div class="live-card">
+                            <div class="live-card-left">
+                                <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+                                <div class="live-user-info">
+                                    <h4>tr****98</h4>
+                                    <div class="product-name">BOBUX GAMEPASS</div>
+                                    <div class="bobux-amount">113 Bobux</div>
+                                </div>
+                            </div>
+                            <div class="live-card-right">
+                                <div class="live-time">12 jam yang lalu</div>
+                                <div class="live-price">Rp 15.255</div>
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 4 -->
+                        <div class="live-card">
+                            <div class="live-card-left">
+                                <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+                                <div class="live-user-info">
+                                    <h4>ti********06</h4>
+                                    <div class="product-name">BOBUX GAMEPASS</div>
+                                    <div class="bobux-amount">100 Bobux</div>
+                                </div>
+                            </div>
+                            <div class="live-card-right">
+                                <div class="live-time">14 jam yang lalu</div>
+                                <div class="live-price">Rp 13.500</div>
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button class="nav-btn-live next" onclick="moveLiveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- SECTION: FAQ DUA KOLOM -->
+        <div class="faq-two-column-grid">
+            <!-- Kolom Kiri -->
+            <div class="faq-left-box">
+                <div class="faq-badge-top">
+                    <i class="fa-solid fa-circle-question"></i> BANTUAN & FAQ
+                </div>
+                <h2 class="faq-main-title">Punya Pertanyaan?</h2>
+                <p class="faq-desc">Temukan jawaban cepat untuk pertanyaan yang paling sering ditanyakan seputar layanan, pengiriman, dan keamanan di Robuxindo.</p>
+
+                <div class="faq-inner-card">
+                    <div class="faq-inner-content">
+                        <h4 class="faq-inner-title">Masih bingung?</h4>
+                        <p class="faq-inner-text">Tim kami siap bantu kamu pilih layanan yang paling cocok dan aman.</p>
+                        <a href="https://wa.me/6281122217700" target="_blank" class="btn-faq-contact">
+                            Hubungi Kami <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="faq-inner-character">
+                        <img src="img/shark.png" alt="Shark Support" onerror="this.style.display='none'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan: Accordion -->
+            <div class="faq-right-box">
+                <h3 style="font-size: 22px; font-weight: 800; color: #3b281a; margin-bottom: 5px;">Pusat Bantuan</h3>
+                <p style="font-size: 13px; color: #7a6352; font-weight: 600;">Pertanyaan umum seputar transaksi.</p>
+
+                <div class="faq-accordion-list">
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Bagaimana cara melakukan Top Up Bobux?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            Pilih produk yang diinginkan, masukkan username Roblox Anda, pilih metode pembayaran, dan selesaikan transaksi. Bobux akan segera diproses!
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Berapa lama proses pengiriman Bobux?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            Proses pengiriman sangat cepat (kilat) berkisar antara 5 hingga 15 menit setelah pembayaran terkonfirmasi oleh sistem kami.
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>Apakah aman melakukan transaksi di sini?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            Sangat aman! Kami menggunakan metode legal dan terpercaya dengan ribuan testimoni positif dari para Bloxian di seluruh Indonesia.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CUSTOM FOOTER (STYLE COKELAT) -->
+    <footer class="custom-footer">
+        <div class="footer-content-grid">
+            <div class="footer-col">
+                <h3>Sharks Bobux Store</h3>
+                <p>Alamat: Bandung, Jawa Barat</p>
+                <p>No. Whatsapp: +62 811-2221-7700</p>
+                
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore?xtok=MTJwdnBvb3ZwZnF2NQ%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux?si=PT7zJYfko8tLFKCi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="order.html">Beli Bobux</a></li>
+                    <li><a href="Product.html">Beli Gamepass</a></li>
+                    <li><a href="order.html">Bobux via Login</a></li>
+                    <li><a href="order.html">Cek Pesanan</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Informasi</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="https://wa.me/6281122217700" target="_blank">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-note">
+            <p>Sharks Bobux adalah platform independen untuk item digital game. Kami tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Roblox Corporation. Semua trademark adalah milik pemliknya masing-masing dan digunakan hanya untuk tujuan identifikasi. Tidak ada konten yang kami buat yang mengklaim kepemilikan atas trademark pihak ketiga.</p>
+            <p>© 2026 Sharks Bobux Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script Carousel Banner Atas
+        let currentSlide = 0;
+        const track = document.getElementById('track');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlide() {
+            if(track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlide();
+        }
+
+        function setSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        // Script Live Transaksi Carousel
+        let currentLiveIndex = 0;
+        const liveTrack = document.getElementById('liveTrack');
+
+        function moveLiveSlide(direction) {
+            if(liveTrack) {
+                const cards = liveTrack.querySelectorAll('.live-card');
+                const cardWidth = cards[0].offsetWidth + 20; // width + gap
+                const maxIndex = cards.length - 2;
+                
+                currentLiveIndex += direction;
+                if(currentLiveIndex < 0) currentLiveIndex = 0;
+                if(currentLiveIndex > maxIndex) currentLiveIndex = maxIndex;
+
+                liveTrack.style.transform = `translateX(-${currentLiveIndex * cardWidth}px)`;
+            }
+        }
+
+        // Script Accordion FAQ
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Tutup semua accordion lain jika ingin satu yang terbuka
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('active');
+            });
+
+            if(!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: url('shawal.png') repeat;
+            background-size: 400px;
+            background-color: #f5eedf;
+            padding: 30px 5% 0 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .modal-container {
+            background-color: #fbf8f3;
+            border-radius: 28px;
+            padding: 35px 40px;
+            max-width: 1150px;
+            width: 100%;
+            margin: 0 auto 50px auto;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(44, 66, 87, 0.1);
+            border: 1px solid #ebdccb;
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 6px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: #7a6352;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 36px;
+            height: 36px;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b281a;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background-color: #f3ece1;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .method-card {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 24px;
+            padding: 28px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .method-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(59, 40, 26, 0.08);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            background-color: #f5eedf;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #3b281a;
+            border: 1px solid #ebdccb;
+        }
+
+        .arrow-top {
+            color: #3b281a;
+            font-size: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: #7a6352;
+            line-height: 1.4;
+            margin-bottom: 22px;
+            min-height: 38px;
+            font-weight: 600;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #3b281a;
+        }
+
+        .feature-item i {
+            color: #5c3c2a;
+            font-size: 15px;
+            margin-top: 1px;
+        }
+
+        .select-btn {
+            width: 100%;
+            background-color: #5c3c2a;
+            color: #ffffff;
+            border: none;
+            padding: 13px 0;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(92, 60, 42, 0.15);
+        }
+
+        .select-btn:hover {
+            background-color: #432b1d;
+            transform: translateY(-1px);
+        }
+
+        /* CUSTOM FOOTER (STYLE COKELAT) */
+        .custom-footer {
+            background-color: #5c3c2a;
+            color: #fbf8f3;
+            padding: 60px 5% 30px 5%;
+            margin-left: -5%;
+            margin-right: -5%;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(235, 220, 203, 0.2);
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ebdccb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(251, 248, 243, 0.1);
+            border: 1px solid rgba(235, 220, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbf8f3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background-color: #fbf8f3;
+            color: #5c3c2a;
+        }
+
+        .footer-bottom-note {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            font-size: 11px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-container">
+        <!-- Tombol Close mengembalikan ke home.html -->
+        <button class="close-btn" title="Tutup" onclick="goToMenu('home.html')"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="modal-header">
+            <h1 class="modal-title">Pilih Metode Top Up Bobux</h1>
+            <p class="modal-subtitle">Lanjutkan ke metode pembelian yang paling nyaman untuk kamu.</p>
+        </div>
+
+        <div class="method-grid">
+
+            <!-- KARTU 1: GAMEPASS -->
+            <div class="method-card">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+                    </div>
+
+                    <h2 class="card-title">Bobux Gamepass</h2>
+                    <p class="card-desc">Topup lewat gamepass proses cepat</p>
+
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Bobux Masuk 5-7 hari</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Tanpa perlu data akun</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Harga Lebih murah</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=gamepass')" class="select-btn">
+                    Pilih Gamepass <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- KARTU 2: VIA LOGIN -->
+            <div class="method-card">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+                    </div>
+
+                    <h2 class="card-title">Bobux Via Login</h2>
+                    <p class="card-desc">Topup untuk kamu yang butuh kilat</p>
+
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Tanpa Pending dan Paling Aman</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Proses secepat kilat</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Bobux Langsung Masuk</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=login')" class="select-btn">
+                    Pilih Via Login <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- KARTU 3: VIA USERNAME -->
+            <div class="method-card">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-at"></i>
+                        </div>
+                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+                    </div>
+
+                    <h2 class="card-title">Bobux Via Username</h2>
+                    <p class="card-desc">Topup cukup dengan username Roblox</p>
+
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Tanpa password akun</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Tanpa data login apa pun</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Maks 5.000 Bobux per pesanan</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=username')" class="select-btn">
+                    Pilih Via Username <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CUSTOM FOOTER (STYLE COKELAT) -->
+    <footer class="custom-footer">
+        <div class="footer-content-grid">
+            <div class="footer-col">
+                <h3>Sharks Bobux Store</h3>
+                <p>Alamat: Bandung, Jawa Barat</p>
+                <p>No. Whatsapp: +62 811-2221-7700</p>
+                
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore?xtok=MTJwdnBvb3ZwZnF2NQ%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux?si=PT7zJYfko8tLFKCi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="order.html">Beli Bobux</a></li>
+                    <li><a href="product.html">Beli Gamepass</a></li>
+                    <li><a href="order.html">Bobux via Login</a></li>
+                    <li><a href="order.html">Cek Pesanan</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Informasi</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-note">
+            <p>Sharks Bobux adalah platform independen untuk item digital game. Kami tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Roblox Corporation. Semua trademark adalah milik pemliknya masing-masing dan digunakan hanya untuk tujuan identifikasi. Tidak ada konten yang kami buat yang mengklaim kepemilikan atas trademark pihak ketiga.</p>
+            <p>© 2026 Sharks Bobux Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT SWITCH PAGE & NAVBAR SYNC -->
+    <script>
+        function goToMenu(targetUrl) {
+            window.location.href = targetUrl;
+
+            try {
+                if (window.parent && window.parent.document) {
+                    let navButtons = window.parent.document.querySelectorAll('.nav-links a.nav-btn');
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+
+                    if (targetUrl.includes('order.html')) {
+                        let beliBtn = Array.from(navButtons).find(b => b.getAttribute('href').includes('order.html'));
+                        if (beliBtn) beliBtn.classList.add('active');
+                    } else if (targetUrl.includes('home.html')) {
+                        let homeBtn = Array.from(navButtons).find(b => b.getAttribute('href').includes('home.html'));
+                        if (homeBtn) homeBtn.classList.add('active');
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
+</body>
+</html>

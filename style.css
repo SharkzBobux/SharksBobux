@@ -1,0 +1,234 @@
+/* ==========================================
+   1. GLOBAL & CORE LAYOUT
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: #8eb4d7; /* Tema background biru pastel hiu */
+    color: #2c4257;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   2. HEADER & NAVBAR
+   ========================================== */
+.navbar-container {
+    background-color: #fbf8f3; /* Panel krem bersih senada */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 5%;
+    border-bottom: 2px solid #ebdccb;
+    box-shadow: 0 4px 15px rgba(44, 66, 87, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    background-color: #5c3c2a;
+    color: #fbf8f3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(92, 60, 42, 0.2);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 19px;
+    font-weight: 800;
+    color: #3b281a;
+}
+
+.brand-sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8c5332;
+    letter-spacing: 0.8px;
+}
+
+/* MENU NAVIGASI */
+.nav-links {
+    display: flex;
+    align-items: center;
+    background-color: #f3ece1;
+    padding: 6px;
+    border-radius: 30px;
+    gap: 6px;
+    border: 1px solid #ebdccb;
+}
+
+.nav-btn, .dropbtn {
+    text-decoration: none;
+    color: #635043;
+    padding: 9px 20px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background-color: #5c3c2a;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(92, 60, 42, 0.15);
+}
+
+/* DROPDOWN SOCIALS - DIPERBAIKI AGAR KURSOR STABIL */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fbf8f3;
+    min-width: 160px;
+    box-shadow: 0px 10px 25px rgba(44, 66, 87, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 0px; /* Dibuat 0 agar menempel rapat tanpa celah kosong */
+    padding-top: 10px; /* Padding atas di dalam box menggantikan fungsi celah jarak */
+    z-index: 200;
+    border: 1.5px solid #ebdccb;
+}
+
+.dropdown-content a {
+    color: #3b281a;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f3ece1;
+    color: #5c3c2a;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.icon-arrow {
+    font-size: 10px;
+    margin-left: 4px;
+}
+
+/* ACTION BUTTONS */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ebdccb;
+    background: #fbf8f3;
+    color: #3b281a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background-color: #f3ece1;
+    border-color: #5c3c2a;
+}
+
+.btn-outline {
+    background: #fbf8f3;
+    border: 1px solid #ebdccb;
+    padding: 9px 20px;
+    border-radius: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #3b281a;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background: #f3ece1;
+    border-color: #5c3c2a;
+}
+
+.btn-primary {
+    background: #5c3c2a;
+    border: none;
+    padding: 9px 22px;
+    border-radius: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(92, 60, 42, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #432b1d;
+}
+
+/* IFRAME & KONTEN CONTAINER */
+.content-area {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#iframe-konten {
+    width: 100%;
+    border: none;
+    min-height: 700px;
+}
+
+/* ==========================================
+   3. FOOTER
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 22px;
+    background-color: #fbf8f3;
+    border-top: 2px solid #ebdccb;
+    font-size: 13px;
+    font-weight: 700;
+    color: #7a6352;
+    margin-top: auto;
+}
