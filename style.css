@@ -9,11 +9,12 @@
 }
 
 body {
-    background-color: #8eb4d7; /* Tema background biru pastel hiu */
-    color: #2c4257;
+    background-color: #f5eedf; /* Disesuaikan dengan base color halamanmu sebelumnya */
+    color: #3b281a;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* ==========================================
@@ -93,13 +94,13 @@ body {
     cursor: pointer;
 }
 
-.nav-btn.active, .nav-btn:hover {
+.nav-btn.active, .nav-btn:hover, .dropbtn:hover {
     background-color: #5c3c2a;
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(92, 60, 42, 0.15);
 }
 
-/* DROPDOWN SOCIALS - DIPERBAIKI AGAR KURSOR STABIL */
+/* DROPDOWN SOCIALS */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -115,15 +116,15 @@ body {
     box-shadow: 0px 10px 25px rgba(44, 66, 87, 0.12);
     border-radius: 16px;
     overflow: hidden;
-    margin-top: 0px; /* Dibuat 0 agar menempel rapat tanpa celah kosong */
-    padding-top: 10px; /* Padding atas di dalam box menggantikan fungsi celah jarak */
+    margin-top: 4px; /* Diberikan sedikit jarak aman agar tidak menempel kaku */
+    padding: 6px 0;
     z-index: 200;
     border: 1.5px solid #ebdccb;
 }
 
 .dropdown-content a {
     color: #3b281a;
-    padding: 12px 18px;
+    padding: 10px 16px;
     text-decoration: none;
     display: flex;
     align-items: center;
