@@ -15,7 +15,7 @@
         }
 
         body {
-            background: url('shawal.png') repeat;
+            background: url('spiral.png') ;
             background-size: 400px;
             background-color: #f5eedf;
             padding: 30px 5% 0 5%;
@@ -25,33 +25,76 @@
             justify-content: space-between;
         }
 
+        .product-wrapper {
+            max-width: 1150px;
+            width: 100%;
+            margin: 0 auto 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* PANEL RUNNING TEXT DENGAN BACKGROUND img/fisha.jpg */
+        .marquee-panel {
+            background-image: url('img/fisha.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 24px;
+            padding: 25px 35px;
+            box-shadow: 0 10px 30px rgba(44, 66, 87, 0.1);
+            border: 1px solid #ebdccb;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Overlay tipis agar teks tetap kontras terbaca tapi gambar fisha.jpg tetap terlihat jelas */
+        .marquee-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.75);
+            z-index: 1;
+        }
+
+        .marquee-content-box {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 22s linear infinite;
+        }
+
+        .marquee-track h1 {
+            display: inline;
+            font-size: 24px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* CONTAINER UTAMA KARTU PRODUK */
         .modal-container {
             background-color: #fbf8f3;
             border-radius: 28px;
             padding: 35px 40px;
             max-width: 1150px;
             width: 100%;
-            margin: 0 auto 50px auto;
             position: relative;
             box-shadow: 0 15px 35px rgba(44, 66, 87, 0.1);
             border: 1px solid #ebdccb;
-        }
-
-        .modal-header {
-            margin-bottom: 30px;
-        }
-
-        .modal-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #3b281a;
-            margin-bottom: 6px;
-        }
-
-        .modal-subtitle {
-            font-size: 14px;
-            color: #7a6352;
-            font-weight: 600;
         }
 
         .close-btn {
@@ -70,6 +113,7 @@
             cursor: pointer;
             border: none;
             transition: all 0.2s;
+            z-index: 3;
         }
 
         .close-btn:hover {
@@ -290,120 +334,129 @@
 </head>
 <body>
 
-    <div class="modal-container">
-        <!-- Tombol Close mengembalikan ke home.html -->
-        <button class="close-btn" title="Tutup" onclick="goToMenu('home.html')"><i class="fa-solid fa-xmark"></i></button>
-
-        <div class="modal-header">
-            <h1 class="modal-title">Pilih Metode Top Up Bobux</h1>
-            <p class="modal-subtitle">Lanjutkan ke metode pembelian yang paling nyaman untuk kamu.</p>
+    <div class="product-wrapper">
+        
+        <!-- PANEL RUNNING TEXT DENGAN BACKGROUND img/fisha.jpg -->
+        <div class="marquee-panel">
+            <div class="marquee-content-box">
+                <div class="marquee-track">
+                    <h1>𓆝 𓆟 𓆞&nbsp;&nbsp;&nbsp;&nbsp;Pilih Metode Top Up Bobux • Lanjutkan ke metode pembelian yang paling nyaman untuk kamu di Sharks Bobux Store (>ᴗ•) ! •&nbsp;&nbsp;&nbsp;&nbsp;𓆝 𓆟 𓆞</h1>
+                </div>
+            </div>
         </div>
 
-        <div class="method-grid">
+        <!-- KARTU UTAMA PILIHAN METODE TOP UP -->
+        <div class="modal-container">
+            <!-- Tombol Close mengembalikan ke home.html -->
+            <button class="close-btn" title="Tutup" onclick="goToMenu('home.html')"><i class="fa-solid fa-xmark"></i></button>
 
-            <!-- KARTU 1: GAMEPASS -->
-            <div class="method-card">
-                <div>
-                    <div class="card-top">
-                        <div class="icon-box">
-                            <i class="fa-solid fa-gamepad"></i>
+            <div class="method-grid">
+
+                <!-- KARTU 1: GAMEPASS -->
+                <div class="method-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-right arrow-top"></i>
                         </div>
-                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+
+                        <h2 class="card-title">Bobux Gamepass</h2>
+                        <p class="card-desc">Topup lewat gamepass proses cepat</p>
+
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Bobux Masuk 5-7 hari</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Tanpa perlu data akun</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Harga Lebih murah</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <h2 class="card-title">Bobux Gamepass</h2>
-                    <p class="card-desc">Topup lewat gamepass proses cepat</p>
-
-                    <ul class="feature-list">
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Bobux Masuk 5-7 hari</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Tanpa perlu data akun</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Harga Lebih murah</span>
-                        </li>
-                    </ul>
+                    <a href="javascript:void(0)" onclick="goToMenu('order.html?type=gamepass')" class="select-btn">
+                        Pilih Gamepass <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=gamepass')" class="select-btn">
-                    Pilih Gamepass <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- KARTU 2: VIA LOGIN -->
-            <div class="method-card">
-                <div>
-                    <div class="card-top">
-                        <div class="icon-box">
-                            <i class="fa-regular fa-user"></i>
+                <!-- KARTU 2: VIA LOGIN -->
+                <div class="method-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-right arrow-top"></i>
                         </div>
-                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+
+                        <h2 class="card-title">Bobux Via Login</h2>
+                        <p class="card-desc">Topup untuk kamu yang butuh kilat</p>
+
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Tanpa Pending dan Paling Aman</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Proses secepat kilat</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Bobux Langsung Masuk</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <h2 class="card-title">Bobux Via Login</h2>
-                    <p class="card-desc">Topup untuk kamu yang butuh kilat</p>
-
-                    <ul class="feature-list">
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Tanpa Pending dan Paling Aman</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Proses secepat kilat</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Bobux Langsung Masuk</span>
-                        </li>
-                    </ul>
+                    <a href="javascript:void(0)" onclick="goToMenu('order.html?type=login')" class="select-btn">
+                        Pilih Via Login <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=login')" class="select-btn">
-                    Pilih Via Login <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- KARTU 3: VIA USERNAME -->
-            <div class="method-card">
-                <div>
-                    <div class="card-top">
-                        <div class="icon-box">
-                            <i class="fa-solid fa-at"></i>
+                <!-- KARTU 3: VIA USERNAME -->
+                <div class="method-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-at"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-right arrow-top"></i>
                         </div>
-                        <i class="fa-solid fa-arrow-right arrow-top"></i>
+
+                        <h2 class="card-title">Bobux Via Username</h2>
+                        <p class="card-desc">Topup cukup dengan username Roblox</p>
+
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Tanpa password akun</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Tanpa data login apa pun</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>Maks 5.000 Bobux per pesanan</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <h2 class="card-title">Bobux Via Username</h2>
-                    <p class="card-desc">Topup cukup dengan username Roblox</p>
-
-                    <ul class="feature-list">
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Tanpa password akun</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Tanpa data login apa pun</span>
-                        </li>
-                        <li class="feature-item">
-                            <i class="fa-regular fa-circle-check"></i>
-                            <span>Maks 5.000 Bobux per pesanan</span>
-                        </li>
-                    </ul>
+                    <a href="javascript:void(0)" onclick="goToMenu('order.html?type=username')" class="select-btn">
+                        Pilih Via Username <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <a href="javascript:void(0)" onclick="goToMenu('order.html?type=username')" class="select-btn">
-                    Pilih Via Username <i class="fa-solid fa-arrow-right"></i>
-                </a>
             </div>
-
         </div>
+
     </div>
 
     <!-- CUSTOM FOOTER (STYLE COKELAT) -->

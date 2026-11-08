@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Pesanan - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: url('shawal.png') ;
+            background-size: 400px;
+            background-color: #f5eedf;
+            padding: 30px 5% 0 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #3b281a;
+        }
+
+        .shop-wrapper {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .shop-header-card {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 28px;
+            padding: 30px 35px;
+            box-shadow: 0 10px 25px rgba(44, 66, 87, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shop-title-box h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 4px;
+        }
+
+        .shop-title-box p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a6352;
+        }
+
+        .badge-cart-count {
+            background-color: #5c3c2a;
+            color: #ffffff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* KELOMPOK DAFTAR PESANAN */
+        .order-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .order-item-card {
+            background-color: #ffffff;
+            border: 1.5px solid #ebdccb;
+            border-radius: 24px;
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 6px 18px rgba(44, 66, 87, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .order-item-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .order-info-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .order-icon-box {
+            width: 54px;
+            height: 54px;
+            background-color: #f3ece1;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #5c3c2a;
+            border: 1px solid #ebdccb;
+        }
+
+        .order-detail h4 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #3b281a;
+            margin-bottom: 4px;
+        }
+
+        .order-detail p {
+            font-size: 13px;
+            font-weight: 700;
+            color: #7a6352;
+        }
+
+        .order-info-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .order-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #5c3c2a;
+        }
+
+        .status-badge {
+            background-color: #dcfce7;
+            color: #16a34a;
+            border: 1px solid #86efac;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* STATE KETIKA KOSONG */
+        .empty-cart-box {
+            background-color: #fbf8f3;
+            border: 1.5px solid #ebdccb;
+            border-radius: 28px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(44, 66, 87, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .empty-cart-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #f3ece1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            color: #7a6352;
+            border: 1px solid #ebdccb;
+            margin-bottom: 5px;
+        }
+
+        .empty-cart-box h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .empty-cart-box p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a6352;
+            max-width: 350px;
+            line-height: 1.5;
+        }
+
+        .btn-shop-now {
+            background-color: #5c3c2a;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 800;
+            margin-top: 10px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(92, 60, 42, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-shop-now:hover {
+            background-color: #432b1d;
+            transform: translateY(-2px);
+        }
+
+        /* CUSTOM FOOTER */
+        .custom-footer {
+            background-color: #5c3c2a;
+            color: #fbf8f3;
+            padding: 60px 5% 30px 5%;
+            margin-left: -5%;
+            margin-right: -5%;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(235, 220, 203, 0.2);
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ebdccb;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(251, 248, 243, 0.1);
+            border: 1px solid rgba(235, 220, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbf8f3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background-color: #fbf8f3;
+            color: #5c3c2a;
+        }
+
+        .footer-bottom-note {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            font-size: 11px;
+            color: #ebdccb;
+            font-weight: 600;
+            line-height: 1.6;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .footer-content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .order-item-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .order-info-right { align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shop-wrapper">
+        <!-- HEADER KERANJANG -->
+        <div class="shop-header-card">
+            <div class="shop-title-box">
+                <h2>Keranjang & Riwayat Pesanan</h2>
+                <p>Daftar transaksi dan status pembelian Bobux kamu.</p>
+            </div>
+            <div class="badge-cart-count">
+                <i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span> Pesanan
+            </div>
+        </div>
+
+        <!-- CONTAINER DAFTAR PESANAN -->
+        <div id="cartContainer">
+            <!-- Konten akan dimuat secara dinamis oleh JavaScript -->
+        </div>
+    </div>
+
+    <!-- CUSTOM FOOTER -->
+    <footer class="custom-footer">
+        <div class="footer-content-grid">
+            <div class="footer-col">
+                <h3>Sharks Robux Store</h3>
+                <p>Alamat: Bandung, Jawa Barat</p>
+                <p>No. Whatsapp: +62 811-2221-7700</p>
+                
+                <div class="footer-social-icons">
+                    <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="order.html">Beli Bobux</a></li>
+                    <li><a href="product.html">Beli Gamepass</a></li>
+                    <li><a href="order.html">Bobux via Login</a></li>
+                    <li><a href="order.html">Cek Pesanan</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Informasi</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-note">
+            <p>Sharks Robux adalah platform independen untuk item digital game. Kami tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Roblox Corporation.</p>
+            <p>© 2026 Sharks Robux Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOAD DATA PESANAN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadCartData();
+        });
+
+        function loadCartData() {
+            const container = document.getElementById('cartContainer');
+            const cartCountBadge = document.getElementById('cartCount');
+            
+            // Mengambil data riwayat pesanan dari localStorage (disimpan saat order.html sukses)
+            let orders = JSON.parse(localStorage.getItem('sharks_orders')) || [];
+
+            cartCountBadge.innerText = orders.length;
+
+            if (orders.length === 0) {
+                // Tampilan jika belum ada pesanan sama sekali
+                container.innerHTML = `
+                    <div class="empty-cart-box">
+                        <div class="empty-cart-icon">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                        <h3>Belum ada riwayat pesanan</h3>
+                        <p>Yuk, mulai belanja Bobux impianmu dengan harga termurah dan proses kilat di sini!</p>
+                        <a href="order.html" class="btn-shop-now">
+                            Beli Bobux Sekarang <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                `;
+            } else {
+                // Tampilan jika sudah ada riwayat pesanan
+                let htmlList = '<div class="order-list-container">';
+                orders.forEach(order => {
+                    htmlList += `
+                        <div class="order-item-card">
+                            <div class="order-info-left">
+                                <div class="order-icon-box">
+                                    <i class="fa-solid fa-cube"></i>
+                                </div>
+                                <div class="order-detail">
+                                    <h4>${order.jumlah} Bobux (${order.produk})</h4>
+                                    <p><i class="fa-regular fa-user"></i> Akun: @${order.username} &nbsp;•&nbsp; <i class="fa-regular fa-clock"></i> ${order.tanggal}</p>
+                                </div>
+                            </div>
+                            <div class="order-info-right">
+                                <div class="order-price">${order.harga}</div>
+                                <span class="status-badge"><span style="width: 6px; height: 6px; background-color: #16a34a; border-radius: 50%; display: inline-block;"></span> Berhasil Dikirim</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                htmlList += '</div>';
+                container.innerHTML = htmlList;
+            }
+        }
+    </script>
+</body>
+</html>

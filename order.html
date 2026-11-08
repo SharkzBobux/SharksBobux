@@ -6,6 +6,8 @@
     <title>Order - Sharks Robux Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 CDN untuk Pop-up Sukses yang Cantik -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         * {
             margin: 0;
@@ -15,7 +17,7 @@
         }
 
         body {
-            background: url('shawal.png') repeat;
+            background: url('shawal.png') ;
             background-size: 400px;
             background-color: #f5eedf;
             padding: 30px 5% 0 5%;
@@ -314,9 +316,7 @@
             transform: translateY(-2px);
         }
 
-        /* ==========================================
-           NEW CUSTOM FOOTER (STYLE COKELAT)
-           ========================================== */
+        /* CUSTOM FOOTER (STYLE COKELAT) */
         .custom-footer {
             background-color: #5c3c2a;
             color: #fbf8f3;
@@ -526,7 +526,7 @@
                         <label class="form-label">Email</label>
                         <div class="input-box">
                             <i class="fa-regular fa-envelope"></i>
-                            <input type="email" class="form-input" placeholder="Contoh: user@example.com">
+                            <input type="email" id="inputEmail" class="form-input" placeholder="Contoh: user@example.com">
                         </div>
                     </div>
 
@@ -534,7 +534,7 @@
                         <label class="form-label">Nomor WhatsApp / Telepon</label>
                         <div class="whatsapp-box">
                             <div class="whatsapp-prefix">+62</div>
-                            <input type="tel" class="whatsapp-input" placeholder="Contoh: 081234567890">
+                            <input type="tel" id="inputPhone" class="whatsapp-input" placeholder="Contoh: 081234567890">
                         </div>
                     </div>
                 </div>
@@ -597,7 +597,7 @@
         </div>
 
         <!-- TOMBOL COMPLETE ORDER -->
-        <button class="btn-complete">
+        <button class="btn-complete" onclick="completeOrder()">
             Complete Order <i class="fa-solid fa-arrow-right"></i>
         </button>
 
@@ -606,7 +606,6 @@
     <!-- CUSTOM FOOTER (STYLE COKELAT) -->
     <footer class="custom-footer">
         <div class="footer-content-grid">
-            <!-- Kolom 1: Profil Brand & Kontak -->
             <div class="footer-col">
                 <h3>Sharks Bobux Store</h3>
                 <p>Alamat: Bandung, Jawa Barat</p>
@@ -614,13 +613,12 @@
                 
                 <div class="footer-social-icons">
                     <a href="https://wa.me/6281122217700" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/sharks.bobux_officialstore?xtok=MTJwdnBvb3ZwZnF2NQ%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@sharkz.bobux_official?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://youtube.com/@itz_sharksbobux?si=PT7zJYfko8tLFKCi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/sharks.bobux_officialstore" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@sharkz.bobux_official" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@itz_sharksbobux" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
-            <!-- Kolom 2: Layanan -->
             <div class="footer-col">
                 <h3>Layanan</h3>
                 <ul>
@@ -632,7 +630,6 @@
                 </ul>
             </div>
 
-            <!-- Kolom 3: Informasi -->
             <div class="footer-col">
                 <h3>Informasi</h3>
                 <ul>
@@ -650,7 +647,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT KALKULATOR & SINKRONISASI DATATABLE -->
+    <!-- SCRIPT KALKULATOR & FUNGSI COMPLETE ORDER -->
     <script>
         const HARGA_PER_BOBUX = 135;
 
@@ -699,6 +696,58 @@
             document.getElementById('sumJumlah').innerText = jumlah ? jumlah + ' RBX' : '0 RBX';
             document.getElementById('sumSubtotal').innerText = hargaVal;
             document.getElementById('sumTotal').innerText = hargaVal;
+        }
+
+        // FUNGSI KETIKA TOMBOL COMPLETE ORDER DIPENCET
+        function completeOrder() {
+            let username = document.getElementById('inputUsername').value;
+            let jumlah = document.getElementById('inputJumlah').value;
+            let hargaVal = document.getElementById('inputHarga').value;
+            let produkNama = document.getElementById('sumProduk').innerText;
+
+            // Validasi jika username kosong
+            if (!username) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Mohon masukkan Username Roblox kamu terlebih dahulu!',
+                    confirmButtonColor: '#633f2e'
+                });
+                return;
+            }
+
+            // 1. Buat data pesanan baru
+            let newOrder = {
+                produk: produkNama,
+                jumlah: jumlah + ' RBX',
+                username: username,
+                harga: hargaVal,
+                tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+            };
+
+            // 2. Simpan data ke memori browser (localStorage) agar muncul di shop.html
+            let existingOrders = JSON.parse(localStorage.getItem('sharks_orders')) || [];
+            existingOrders.unshift(newOrder);
+            localStorage.setItem('sharks_orders', JSON.stringify(existingOrders));
+
+            // 3. Pop-up Berhasil & diarahkan ke keranjang
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Berhasil Dikirim!',
+                html: `Pesanan <b>${jumlah} Bobux</b> untuk akun <b>@${username}</b> telah diterima.<br><br>Mohon ditunggu robuxnya ya! 😉`,
+                confirmButtonText: 'OK, Cek Keranjang',
+                confirmButtonColor: '#633f2e',
+                background: '#fbf8f3',
+                color: '#3b281a',
+                customClass: {
+                    popup: 'custom-swal-popup'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Otomatis membuka halaman keranjang (shop.html)
+                    window.location.href = 'shop.html';
+                }
+            });
         }
     </script>
 </body>
