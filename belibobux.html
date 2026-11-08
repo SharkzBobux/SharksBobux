@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beli Bobux - Sharks Robux Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #8eb4d7; /* Tema background biru pastel hiu */
+            padding: 30px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* CONTAINER UTAMA / CARD FORM */
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ebdccb;
+        }
+
+        /* HEADER LANGKAH (STEP HEADER) */
+        .step-header {
+            background-color: #d8a26c; /* Warna cokelat krem karamel sesuai gambar */
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background-color: #ffffff;
+            color: #d8a26c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* BODY FORM */
+        .form-body {
+            padding: 30px 35px;
+            background-color: #fcfaf7;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #3b281a;
+            margin-bottom: 10px;
+        }
+
+        .form-label i {
+            color: #633f2e;
+            font-size: 16px;
+        }
+
+        /* INPUT FIELD */
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 18px;
+            color: #9c8273;
+            font-size: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            padding-left: 45px;
+            background-color: #f7f3ed;
+            border: 1px solid #ebdccb;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b281a;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #d8a26c;
+            background-color: #ffffff;
+        }
+
+        .form-input-no-icon {
+            padding-left: 20px;
+        }
+
+        /* DUAL INPUT (JUMLAH & NOMINAL HARGA) */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* PILIHAN CEPAT (QUICK SELECT GRID) */
+        .quick-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #3b281a;
+            margin-top: 10px;
+            margin-bottom: 16px;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        /* KARTU PAKET BOBUX */
+        .package-card {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 18px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .package-card:hover, .package-card.selected {
+            border-color: #633f2e;
+            box-shadow: 0 4px 12px rgba(99, 63, 46, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .package-amount {
+            font-size: 15px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        .package-divider {
+            border-bottom: 1px dashed #ebdccb;
+            margin: 2px 0;
+        }
+
+        .package-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: #3b281a;
+        }
+
+        /* RESPONSIF */
+        @media (max-width: 850px) {
+            .package-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dual-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <!-- STEP HEADER -->
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <div class="step-title">MASUKKAN DATA</div>
+        </div>
+
+        <!-- FORM BODY -->
+        <div class="form-body">
+            
+            <!-- USERNAME ROBLOX -->
+            <div class="form-group">
+                <label class="form-label">Username Roblox</label>
+                <div class="input-box">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" class="form-input" placeholder="Username123" value="Username123">
+                </div>
+            </div>
+
+            <!-- DUAL INPUT: JUMLAH & NOMINAL HARGA -->
+            <div class="dual-grid form-group">
+                <div>
+                    <label class="form-label"><i class="fa-solid fa-box-open"></i> Jumlah</label>
+                    <div class="input-box">
+                        <input type="number" id="inputJumlah" class="form-input form-input-no-icon" value="10" oninput="hitungHarga()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label"><i class="fa-solid fa-box-open"></i> Nominal Harga</label>
+                    <div class="input-box">
+                        <input type="text" id="inputHarga" class="form-input form-input-no-icon" value="Rp 1.350" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PILIHAN CEPAT -->
+            <div class="quick-title">Atau pilih cepat :</div>
+
+            <div class="package-grid">
+                <!-- 100 Bobux -->
+                <div class="package-card" onclick="pilihPaket(100, 13500, this)">
+                    <div class="package-amount">100 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 13.500</div>
+                </div>
+
+                <!-- 200 Bobux -->
+                <div class="package-card" onclick="pilihPaket(200, 27000, this)">
+                    <div class="package-amount">200 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 27.000</div>
+                </div>
+
+                <!-- 300 Bobux -->
+                <div class="package-card" onclick="pilihPaket(300, 40500, this)">
+                    <div class="package-amount">300 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 40.500</div>
+                </div>
+
+                <!-- 400 Bobux -->
+                <div class="package-card" onclick="pilihPaket(400, 54000, this)">
+                    <div class="package-amount">400 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 54.000</div>
+                </div>
+
+                <!-- 500 Bobux -->
+                <div class="package-card" onclick="pilihPaket(500, 67500, this)">
+                    <div class="package-amount">500 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 67.500</div>
+                </div>
+
+                <!-- 600 Bobux -->
+                <div class="package-card" onclick="pilihPaket(600, 81000, this)">
+                    <div class="package-amount">600 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 81.000</div>
+                </div>
+
+                <!-- 700 Bobux -->
+                <div class="package-card" onclick="pilihPaket(700, 94500, this)">
+                    <div class="package-amount">700 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 94.500</div>
+                </div>
+
+                <!-- 800 Bobux -->
+                <div class="package-card" onclick="pilihPaket(800, 108000, this)">
+                    <div class="package-amount">800 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 108.000</div>
+                </div>
+
+                <!-- 900 Bobux -->
+                <div class="package-card" onclick="pilihPaket(900, 121500, this)">
+                    <div class="package-amount">900 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 121.500</div>
+                </div>
+
+                <!-- 1000 Bobux -->
+                <div class="package-card" onclick="pilihPaket(1000, 135000, this)">
+                    <div class="package-amount">1000 Bobux</div>
+                    <div class="package-divider"></div>
+                    <div class="package-price">Rp 135.000</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT KALKULATOR OTOMATIS & PILIH PAKET -->
+    <script>
+        const HARGA_PER_BOBUX = 135; // Rp 13.500 / 100 Bobux = Rp 135 per Bobux
+
+        function hitungHarga() {
+            let jumlahInput = document.getElementById('inputJumlah').value;
+            let totalHarga = jumlahInput * HARGA_PER_BOBUX;
+            document.getElementById('inputHarga').value = 'Rp ' + totalHarga.toLocaleString('id-ID');
+            
+            // Hapus seleksi aktif di pilihan cepat jika mengetik sendiri
+            document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+        }
+
+        function pilihPaket(jumlah, harga, element) {
+            document.getElementById('inputJumlah').value = jumlah;
+            document.getElementById('inputHarga').value = 'Rp ' + harga.toLocaleString('id-ID');
+
+            // Tandai kartu yang dipilih
+            document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
