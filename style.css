@@ -26,15 +26,16 @@ body {
    PAGE WRAPPER
    ========================================== */
 .page-wrapper {
-    background-image: url('shawal.png');
-    background-repeat: repeat;
-    background-size: 400px auto;
-    background-position: top center;
-    background-color: transparent;
-    width: 100%;
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  background-image: url('shawal.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 
