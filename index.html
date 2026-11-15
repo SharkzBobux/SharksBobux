@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <!-- Font Plus Jakarta Sans & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Penyesuaian agar logo.png tampil sempurna di dalam lingkaran logo */
         .logo-icon img {
@@ -16,6 +16,43 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+        }
+
+        /* Style untuk User Profile Badge di Navbar */
+        .user-profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f3ece1;
+            border: 1.5px solid #ebdccb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #3b281a;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .user-profile-badge i {
+            color: #5c3c2a;
+            font-size: 16px;
+        }
+
+        .btn-logout {
+            background: none;
+            border: none;
+            color: #7a6352;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            margin-left: 6px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            color: #dc2626;
+            background: rgba(220, 38, 38, 0.08);
         }
     </style>
 </head>
@@ -55,11 +92,13 @@
         </nav>
 
         <!-- ACTION BUTTONS -->
-        <div class="nav-actions">
+        <div class="nav-actions" id="navActions">
             <!-- Tombol Keranjang sekarang terhubung ke shop.html di dalam iframe -->
             <a href="shop.html" target="konten" class="btn-icon" title="Keranjang" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #3b281a;"><i class="fa-solid fa-cart-shopping"></i></a>
-            <a href="login.html" target="konten" class="btn-outline" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
-            <a href="register.html" target="konten" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Register</a>
+            <div id="authButtonsContainer" style="display: inline-flex; align-items: center; gap: 10px;">
+                <a href="login.html" target="konten" class="btn-outline" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
+                <a href="register.html" target="konten" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Register</a>
+            </div>
         </div>
     </header>
 
@@ -122,6 +161,29 @@
                 resizeIframe(iframe);
             }
         }, 500);
+
+        // Cek Status Login di localStorage dan Update Navbar Utama
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('sharks_username');
+            const authContainer = document.getElementById('authButtonsContainer');
+
+            if (isLoggedIn === 'true' && username && authContainer) {
+                authContainer.innerHTML = `
+                    <div class="user-profile-badge">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span>@${username}</span>
+                        <button class="btn-logout" onclick="handleLogout()" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    </div>
+                `;
+            }
+        });
+
+        function handleLogout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('sharks_username');
+            window.location.reload();
+        }
     </script>
 </body>
 </html>
