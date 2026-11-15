@@ -1,7 +1,6 @@
-/* ========================================================================== */
-/* SHARKS ROBUX STORE - GLOBAL STYLESHEET                                    */
-/* ========================================================================== */
-
+/* ==========================================
+   1. GLOBAL & CORE LAYOUT
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -9,126 +8,248 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Standarisasi Body di Semua Halaman */
+/* ==========================================
+   BODY — warna dasar saja, tanpa pola
+   ========================================== */
 body {
-    background-size: 400px;
     background-color: #f5eedf;
-    min-height: 100vh;
+    color: #3b281a;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    color: #3b281a;
+    min-height: 100vh;
     overflow-x: hidden;
-    padding: 30px 5% 0 5%;
+    margin: 0;
+    padding: 0;
 }
 
-/* ========================================================================== */
-/* CUSTOM FOOTER FIX (Mencegah Overflows & Background Memanjang)              */
-/* ========================================================================== */
-.custom-footer {
+/* ==========================================
+   WRAPPER
+   ========================================== */
+.page-wrapper {
+    background-image: url('shawal.png');
+    background-repeat: repeat;
+    background-size: 200px auto;
+    background-position: top center;
+    background-color: transparent; 
+    width: 100%;
+    flex: 0 0 auto;
+    padding-bottom: 20px;
+}
+
+
+/* ==========================================
+   2. HEADER & NAVBAR
+   ========================================== */
+.navbar-container {
+    background-color: #fbf8f3; /* Panel krem bersih senada */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 5%;
+    border-bottom: 2px solid #ebdccb;
+    box-shadow: 0 4px 15px rgba(44, 66, 87, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
     background-color: #5c3c2a;
     color: #fbf8f3;
-    padding: 60px 5% 30px 5%;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    margin-top: auto;
-    box-sizing: border-box;
-}
-
-.footer-content-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(235, 220, 203, 0.2);
-}
-
-.footer-col h3 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    color: #ffffff;
-}
-
-.footer-col p {
-    font-size: 13px;
-    color: #ebdccb;
-    font-weight: 600;
-    line-height: 1.6;
-    margin-bottom: 6px;
-}
-
-.footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-col ul li a {
-    color: #ebdccb;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    transition: color 0.2s;
-}
-
-.footer-col ul li a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-.footer-social-icons {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.footer-social-icons a {
-    width: 38px;
-    height: 38px;
-    background-color: rgba(251, 248, 243, 0.1);
-    border: 1px solid rgba(235, 220, 203, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fbf8f3;
-    text-decoration: none;
-    font-size: 15px;
-    transition: all 0.2s;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(92, 60, 42, 0.2);
 }
 
-.footer-social-icons a:hover {
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 19px;
+    font-weight: 800;
+    color: #3b281a;
+}
+
+.brand-sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8c5332;
+    letter-spacing: 0.8px;
+}
+
+/* MENU NAVIGASI */
+.nav-links {
+    display: flex;
+    align-items: center;
+    background-color: #f3ece1;
+    padding: 6px;
+    border-radius: 30px;
+    gap: 6px;
+    border: 1px solid #ebdccb;
+}
+
+.nav-btn, .dropbtn {
+    text-decoration: none;
+    color: #635043;
+    padding: 9px 20px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.nav-btn.active, .nav-btn:hover, .dropbtn:hover {
+    background-color: #5c3c2a;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(92, 60, 42, 0.15);
+}
+
+/* DROPDOWN SOCIALS */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #fbf8f3;
+    min-width: 160px;
+    box-shadow: 0px 10px 25px rgba(44, 66, 87, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 4px; 
+    padding: 6px 0;
+    z-index: 200;
+    border: 1.5px solid #ebdccb;
+}
+
+.dropdown-content a {
+    color: #3b281a;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f3ece1;
     color: #5c3c2a;
 }
 
-.footer-bottom-note {
-    max-width: 1200px;
-    margin: 30px auto 0 auto;
-    font-size: 11px;
-    color: #ebdccb;
-    font-weight: 600;
-    line-height: 1.6;
-    opacity: 0.85;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-/* ========================================================================== */
-/* RESPONSIVE BREAKPOINTS                                                     */
-/* ========================================================================== */
-@media (max-width: 900px) {
-    .footer-content-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+.icon-arrow {
+    font-size: 10px;
+    margin-left: 4px;
+}
+
+/* ACTION BUTTONS */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ebdccb;
+    background: #fbf8f3;
+    color: #3b281a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background-color: #f3ece1;
+    border-color: #5c3c2a;
+}
+
+.btn-outline {
+    background: #fbf8f3;
+    border: 1px solid #ebdccb;
+    padding: 9px 20px;
+    border-radius: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #3b281a;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background: #f3ece1;
+    border-color: #5c3c2a;
+}
+
+.btn-primary {
+    background: #5c3c2a;
+    border: none;
+    padding: 9px 22px;
+    border-radius: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(92, 60, 42, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #432b1d;
+}
+
+/* IFRAME & KONTEN CONTAINER */
+.content-area {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#iframe-konten {
+    width: 100%;
+    border: none;
+    min-height: 700px;
+}
+
+/* ==========================================
+   3. FOOTER
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 22px;
+    background-color: #fbf8f3;
+    border-top: 2px solid #ebdccb;
+    font-size: 13px;
+    font-weight: 700;
+    color: #7a6352;
+    margin-top: auto;
 }
