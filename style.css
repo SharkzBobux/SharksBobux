@@ -9,10 +9,16 @@
 }
 
 /* ==========================================
-   BODY — warna dasar saja, tanpa pola
+   BODY — Background Utama Website
    ========================================== */
 body {
     background-color: #f5eedf;
+    /* Background dipindah ke sini agar otomatis pas di seluruh halaman */
+    background-image: url('shawal.png'); 
+    background-repeat: repeat;
+    background-size: 200px auto;
+    background-position: top center;
+    
     color: #3b281a;
     display: flex;
     flex-direction: column;
@@ -21,21 +27,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
-/* ==========================================
-   WRAPPER
-   ========================================== */
-.page-wrapper {
-    background-image: url('shawal.png');
-    background-repeat: repeat;
-    background-size: 200px auto;
-    background-position: top center;
-    background-color: transparent; 
-    width: 100%;
-    flex: 0 0 auto;
-    padding-bottom: 20px;
-}
-
 
 /* ==========================================
    2. HEADER & NAVBAR
